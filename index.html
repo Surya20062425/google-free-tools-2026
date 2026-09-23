@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Free Tools 2026 — indexed</title>
+<style>
+  :root{
+    --bg:#0a0a0f; color:#e6e6e6; --muted:#888; --accent:#4f8cf7;
+    --card:#12121a; --border:#222; --free:#2ea043; --paid:#b02a37; --lab:#a66;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--muted); padding:24px}
+  h1{color:#fff; font:600 22px/1.2 ui-sans-serif,system-ui; margin:0 0 4px}
+  .sub{color:var(--muted); margin:0 0 22px; max-width:70ch}
+  .bar{height:6px; border-radius:3px; background:#222; overflow:hidden; margin-top:6px}
+  .bar > i{display:block; height:100%; background:var(--free)}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; margin-top:18px}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; color:#e6e6e6; break-inside:avoid}
+  .card .tag{display:inline-block; font-size:11px; font-weight:600; letter-spacing:.04em; padding:2px 8px; border-radius:999px; margin-bottom:8px; text-transform:uppercase}
+  .tag.free{background:rgba(46,160,67,.18); color:#7ee1a0}
+  .tag.paid{background:rgba(176,42,55,.18); color:#ff8a92}
+  .tag.lab{background:rgba(166,102,8,.18); color:#f0c87a}
+  .card h2{margin:0 0 6px; font:600 15px/1.2 ui-sans-serif; color:#fff}
+  .card p{margin:0 0 8px; font-size:13px; color:#bbb}
+  .card a.link{display:inline-block; color:var(--accent); text-decoration:none; word-break:break-all}
+  .card a.link:hover{text-decoration:underline}
+  .meter{position:relative; height:8px; background:#222; border-radius:4px; margin-top:10px; overflow:hidden}
+  .meter > i{position:absolute; left:0; top:0; height:100%; background:linear-gradient(90deg,#1f8a3a,#4ade80); border-radius:4px}
+  .meta{font-size:11px; color:var(--muted); margin-top:6px}
+  .cat{display:inline-block; margin:0 6px 6px 0; padding:4px 10px; background:#1a1a26; border:1px solid #2a2a3a; border-radius:6px; color:#ccc; font-size:12px}
+  .cat button{background:none; border:none; color:inherit; cursor:pointer; font:inherit; padding:0; text-align:left}
+  .cat button:hover{color:#fff}
+  .cat button.active{color:#fff; background:#2a2a3a; border-color:#4f8cf7}
+  .cat .count{opacity:.6; margin-left:4px}
+  .section{margin-top:24px; border-top:1px solid var(--border); padding-top:14px}
+  .section h3{margin:0 0 8px; color:#fff; font:600 15px/1.2 ui-sans-serif}
+  .section p{margin:0 0 4px; font-size:13px; color:#ccc}
+  .section a{color:var(--accent); text-decoration:none}
+  .section a:hover{text-decoration:underline}
+  .legend{font-size:11px; color:var(--muted); margin-top:18px; display:flex; gap:18px; flex-wrap:wrap}
+  .legend i{display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:middle}
+</style>
+</head>
+<body>
+<h1>Google Free Tools 2026</h1>
+<p class="sub">New & useful Google tools you can actually use without paying — as of Google I/O 2026 (May). Free tier shown where it exists; paid-only items are listed separately so you don't waste time. Data: official Google blogs + Mashable / TechRadar coverage of I/O 2026.</p>
+
+<div class="cat" id="cats"></div>
+
+<div class="grid" id="grid"></div>
+
+<div class="legend">
+  <span><i style="background:#2ea043"></i>Free (usable now)</span>
+  <span><i style="background:#b02a37"></i>Paid-only (or gated)</span>
+  <span><i style="background:#a66"></i>Labs / beta</span>
+</div>
+
+<div class="section">
+  <h3>Not free — but useful to know</h3>
+  <p><a href="#paid">Gemini 3 Pro / 3.1 Pro API</a> — paid-only as of Mar 2026.</p>
+  <p><a href="#paid">Google Pics</a> — Canva competitor, summer 2026, free only via Workspace business preview.</p>
+  <p><a href="#paid">Gemini Spark</a> — 24/7 personal agent, $100/mo (AI Ultra, US).</p>
+  <p><a href="#paid">Veo video generation (proper)</a> — paid plans only.</p>
+  <p style="margin-top:8px;color:var(--muted);font-size:12px">Always-free cloud infra (Compute Engine e2-micro, Cloud Storage 5GB, BigQuery sandbox) & $300 new-customer credits exist but are not I/O 2026 news — listed at <a href="https://cloud.google.com/use-cases/free-ai-tools" target="_blank">cloud.google.com/use-cases/free-ai-tools</a>.</p>
+</div>
+
+<div class="section" id="paid" style="display:none"></div>
+
+<script>
+const tools = [
+  // Chat / Research
+  {cat:"chat", tag:"free", name:"Gemini app",
+    desc:"Gemini 3.5 Flash default. Chat, writing, research, image gen/editing (Nano Banana), Gemini Live voice, Canvas, Gems, Deep Research, personal intelligence (Gmail/Photos/Drive if allowed).",
+    free:"~30 prompts/day chat · 20 images/day · 5 Deep Research reports/month · 20 audio overviews/day · 10 music tracks/day",
+    link:"https://gemini.google.com", meter:85},
+  {cat:"chat", tag:"free", name:"AI Mode in Google Search",
+    desc:"Interactive AI search across ~200 countries, 98 languages. Personal intelligence connects Gmail/Photos/Calendar. Generates interactive visuals (pH scale, etc.), practice quizzes, full-length SAT practice in Gemini.",
+    free:"Free, no account gate for basic use",
+    link:"https://www.google.com/search?udm=2", meter:90},
+  {cat:"chat", tag:"free", name:"NotebookLM",
+    desc:"Research tool that answers strictly from YOUR sources — PDFs, docs, web pages, YouTube, audio. Citation on every sentence. Audio overviews (two-host podcast), video overviews, quiz mode, slide decks. Won't hallucinate outside your sources — that's the feature.",
+    free:"100 notebooks · 50 sources/notebook (500K words each) · 50 chat questions/day · 3 audio overviews/day",
+    link:"https://notebooklm.google.com", meter:95},
+  {cat:"chat", tag:"free", name:"Guided Learning",
+    desc:"Tutor mode built on LearnLM. Won't hand you the answer — walks you to it. For learning a skill, not getting a one-off answer.",
+    free:"Free",
+    link:"https://gemini.google.com", meter:70},
+  // Dev / Code
+  {cat:"dev", tag:"free", name:"Google AI Studio",
+    desc:"Free browser playground for Gemini. No credit card, no seat fee. Tweak temperature, system instructions, structured output visually; export as working code. Free tier = Flash/Flash-Lite models (Pro models moved to paid API Mar 2026).",
+    free:"Fully free, all available countries",
+    link:"https://aistudio.google.com", meter:95},
+  {cat:"dev", tag:"free", name:"Jules",
+    desc:"Autonomous coding agent (Gemini 2.5 Pro). Point it at a GitHub repo task — it plans, then writes code in a secure env, opens a clean PR for review. Delegate multiple backlog items at once; audio overview of codebase updates.",
+    free:"Public beta, free at jules.google",
+    link:"https://jules.google", meter:60},
+  {cat:"dev", tag:"free", name:"Gemini Code Assist (Individuals)",
+    desc:"Free code completions: 180,000/month (6,000/day) — ~90× Copilot Free's 2,000/mo. 240 AI chats/day. VS Code + JetBrains plugins. Deep Google Cloud / Firebase / BigQuery integration.",
+    free:"180K completions/mo · 240 chats/day · no credit card",
+    link:"https://code.google.com/", meter:98},
+  {cat:"dev", tag:"free", name:"Gemini CLI",
+    desc:"Terminal-native Gemini. Authenticated free tier: 1,000 API requests/day.",
+    free:"1,000 API requests/day (authenticated)",
+    link:"https://github.com/google-gemini/gemini-cli", meter:65},
+  {cat:"dev", tag:"lab", name:"Stitch",
+    desc:"Prompt / wireframe / image → high-quality UI design + frontend code for desktop & mobile. Iterate conversationally, adjust themes, export to CSS/HTML or Figma.",
+    free:"Free (Labs)",
+    link:"https://stitch.withgoogle.com", meter:45},
+  // Creation
+  {cat:"create", tag:"free", name:"Google Vids",
+    desc:"AI video creation inside Google Workspace (no extra app). Powered by Veo 3.1 + Lyria 3 (Apr 2026 update): video clips, custom music, branded AI avatars (company logo on shirt, branded backdrop). Avatars insert dynamically into imported slides.",
+    free:"10 AI video generations/month per Google account",
+    link:"https://vids.google.com", meter:60},
+  {cat:"create", tag:"free", name:"Nano Banana 2 (Gemini image gen)",
+    desc:"Up to 4K image generation with readable text, object-level editing. Free in Gemini app.",
+    free:"~20 images/day free in Gemini app",
+    link:"https://gemini.google.com", meter:75},
+  {cat:"create", tag:"lab", name:"Flow",
+    desc:"Cinematic video sequences + images. Replaced Whisk/ImageFX (shut down Apr 2026). Daily image & video credits, watermarked exports.",
+    free:"Daily credits, free tier usable; video credits limited",
+    link:"https://labs.google/fx", meter:50},
+  {cat:"create", tag:"lab", name:"Mixboard",
+    desc:"Mood boards & visual thinking. Free (Labs).",
+    free:"Free (Labs)",
+    link:"https://labs.google/", meter:30},
+  {cat:"create", tag:"free", name:"Gems",
+    desc:"Reusable custom AI personas with a fixed job. Free.",
+    free:"Free",
+    link:"https://gemini.google.com", meter:55},
+  {cat:"create", tag:"lab", name:"Opal",
+    desc:"Turn a workflow into a shareable app. Free.",
+    free:"Free",
+    link:"https://opal.withgoogle.com/", meter:35},
+  // Students
+  {cat:"student", tag:"free", name:"College students — 1 yr Google AI Pro (US)",
+    desc:"Eligible US college students get 1 year of Google AI Pro at no cost (SheerID verification). Includes Gemini 3.5 Flash, Deep Research, NotebookLM upgrades, more. Students elsewhere get cheaper AI Plus.",
+    free:"1 year free Google AI Pro (US students); AI Plus discount elsewhere",
+    link:"https://blog.google/products/ai/gemini-students-offer/", meter:90},
+];
+
+const cats = [
+  {key:"chat", label:"Chat / Research"},
+  {key:"dev", label:"Dev / Code"},
+  {key:"create", label:"Creation"},
+  {key:"student", label:"Students"},
+];
+
+let activeCat = null;
+
+function fmt(s){return s}
+
+function renderCats(){
+  const el = document.getElementById("cats");
+  const all = document.createElement("button");
+  all.className = activeCat===null?"active":"";
+  all.innerHTML = "All" + " <span class='count'>"+tools.length+"</span>";
+  all.onclick = ()=>{activeCat=null; renderAll()};
+  el.appendChild(all);
+  cats.forEach(c=>{
+    const b = document.createElement("button");
+    const n = tools.filter(t=>t.cat===c.key).length;
+    b.className = activeCat===c.key?"active":"";
+    b.innerHTML = c.label + " <span class='count'>"+n+"</span>";
+    b.onclick = ()=>{activeCat=c.key; renderAll()};
+    el.appendChild(b);
+  });
+}
+
+function renderOne(t){
+  const card = document.createElement("div");
+  card.className = "card";
+  const tagEl = document.createElement("span");
+  tagEl.className = "tag "+t.tag;
+  tagEl.textContent = t.tag==="free"?"Free":t.tag==="paid"?"Paid":t.tag==="lab"?"Labs":"";
+  const h = document.createElement("h2");
+  h.textContent = t.name;
+  const p = document.createElement("p");
+  p.textContent = t.desc;
+  const a = document.createElement("a");
+  a.className = "link";
+  a.href = t.link;
+  a.target = "_blank";
+  a.textContent = t.link;
+  const meter = document.createElement("div");
+  meter.className = "meter";
+  const i = document.createElement("i");
+  i.style.width = Math.min(100,t.meter)+"%";
+  meter.appendChild(i);
+  const meta = document.createElement("div");
+  meta.className = "meta";
+  meta.textContent = "Free tier: " + t.free + "  ·  "+t.meter+"/100";
+  card.appendChild(tagEl);
+  card.appendChild(h);
+  card.appendChild(p);
+  card.appendChild(a);
+  card.appendChild(meter);
+  card.appendChild(meta);
+  return card;
+}
+
+function renderGrid(){
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+  const list = activeCat ? tools.filter(t=>t.cat===activeCat) : tools;
+  list.forEach(t=>grid.appendChild(renderOne(t)));
+}
+
+function renderPaid(){
+  const paid = document.getElementById("paid");
+  paid.style.display = "block";
+  paid.innerHTML = "";
+  const items = [
+    {name:"Gemini 3 Pro / 3.1 Pro (API)", note:"Paid-only API access as of March 2026. Free tier = Flash/Flash-Lite."},
+    {name:"Google Pics", note:"Canva competitor. Summer 2026. Free only via Workspace business preview; not broadly free."},
+    {name:"Gemini Spark", note:"24/7 personal agent (Gemini 3.5 Flash + Antigravity). $100/mo AI Ultra, US only."},
+    {name:"Veo video generation (proper)", note:"Full Veo video gen locked to paid plans; Vids gets 10/mo free instead."},
+  ];
+  items.forEach(it=>{
+    const d = document.createElement("div");
+    d.style.cssText = "margin-bottom:8px";
+    const h = document.createElement("strong");
+    h.style.color = "#ff8a92";
+    h.textContent = it.name;
+    const p = document.createElement("p");
+    p.style.cssText = "margin:2px 0 0; font-size:13px; color:#bbb";
+    p.textContent = it.note;
+    d.appendChild(h);
+    d.appendChild(p);
+    paid.appendChild(d);
+  });
+}
+
+function renderAll(){
+  renderCats();
+  renderGrid();
+  renderPaid();
+}
+
+document.addEventListener("DOMContentLoaded", renderAll);
+</script>
+</body>
+</html>
